@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeController {
 
     @RequestMapping(value = "/i")
-    public String index(){
+    public String index() {
         return "/index.html";
     }
 
     @RequestMapping(value = "/welcome")
-    public String home(){
+    public String home() {
         return "views/welcome";
     }
 }
