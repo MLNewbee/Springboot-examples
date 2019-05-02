@@ -16,12 +16,12 @@ import java.io.File;
 public class MailService {
 
     @Value("${spring.mail.username}")
-    private  String From;
+    private String From;
 
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSimpleMail(String To,String subject,String content){
+    public void sendSimpleMail(String To, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(To);
         message.setSubject(subject);
@@ -31,10 +31,10 @@ public class MailService {
         mailSender.send(message);
     }
 
-    public  void  sendHtmlMail(String To,String subject,String content) throws MessagingException {
+    public void sendHtmlMail(String To, String subject, String content) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(From);
         helper.setTo(To);
         helper.setSubject(subject);
@@ -43,33 +43,33 @@ public class MailService {
 
     }
 
-    public void  sendAttachedmentsMail(String To,String subject,String content,String filePath) throws MessagingException {
+    public void sendAttachedmentsMail(String To, String subject, String content, String filePath) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(From);
         helper.setTo(To);
         helper.setSubject(subject);
         helper.setText(content);
 
-        FileSystemResource   file = new FileSystemResource(new File(filePath));
-        String filename  = file.getFilename();
-        helper.addAttachment(filename,file);
+        FileSystemResource file = new FileSystemResource(new File(filePath));
+        String filename = file.getFilename();
+        helper.addAttachment(filename, file);
         mailSender.send(message);
 
     }
 
-    public void  sendInLineResourceMail(String To,String subject,String content,String rscPath,String rscId) throws MessagingException {
+    public void sendInLineResourceMail(String To, String subject, String content, String rscPath, String rscId) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(From);
         helper.setTo(To);
         helper.setSubject(subject);
         helper.setText(content);
 
-        FileSystemResource  resource = new FileSystemResource(new File(rscPath));
-        helper.addInline(rscId,resource);
+        FileSystemResource resource = new FileSystemResource(new File(rscPath));
+        helper.addInline(rscId, resource);
         mailSender.send(message);
 
     }
