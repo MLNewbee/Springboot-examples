@@ -1,0 +1,13 @@
+
+
+spring:
+  freemarker:
+    template-loader-path: /templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    allow-session-override: false
+    request-context-attribute: request
+    suffix: .ftl
